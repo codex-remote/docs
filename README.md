@@ -17,7 +17,7 @@ updated: 2026-08-23
 > Apple Silicon 本机已经可以启动完整 Runtime、生成一次性二维码，并在 iPhone Safari 单标签中完成配对、刷新恢复、真实会话、SSE、退出与 Mac 端撤销。详细真机证据以 `mobile-web/docs/iphone-safari-acceptance.md` 为准。
 
 > [!warning] 尚未公开发布
-> Runtime `0.2.0` 已通过本机 Homebrew 验收，但 GitHub 组织与远端仓库、不可变 Tag/Release、Developer ID 签名、Apple 公证、第三方许可证清单和干净 Mac 升级/回滚验收尚未完成。当前不能向其他用户宣称已经可以从远端安装。
+> Runtime `0.2.0` 已通过本机 Homebrew 验收，`codex-remote` GitHub 组织和仓库边界已建立。不可变 Tag/Release 资产、Developer ID 签名、Apple 公证、第三方许可证清单和干净 Mac 升级/回滚验收尚未完成。当前不能向其他用户宣称已经可以从远程安装。
 
 ## 阅读入口
 

@@ -23,8 +23,8 @@ owner: platform-team
 | --- | --- | --- |
 | 局域网 Mobile Web | 可用里程碑 | iPhone Safari 单标签真机闭环已通过 |
 | Homebrew Runtime `0.2.0` | 本地发布候选 | 本机安装、隔离数据库、动态端口、LaunchAgents、Doctor 与配对通过 |
-| 第三方 Homebrew Tap | 待公开 | 远端仓库与 Release 资产尚未建立 |
-| 官方短命令 `brew install codex-remote` | 未获得 | 需要进入 Homebrew 官方仓库 |
+| 第三方 Homebrew Tap | 仓库已公开 | Formula 已推送，但签名、公证的 Release 资产尚未发布 |
+| 官方短命令 `brew install codex-remote` | 未获得 | 闭源 Runtime 需提交 Homebrew 官方 Cask，不是 `homebrew/core` Formula |
 | 公网访问 | 未交付 | TLS、稳定域名、限流、容量和恢复演练待完成 |
 | 原生 iPhone Runtime 迁移 | 未交付 | 当前 iPhone App 仍使用旧 WebSocket 数据通道 |
 | Admin/Diagnostics | 独立演进 | 不属于 Homebrew 用户 Runtime |
@@ -41,9 +41,23 @@ owner: platform-team
 | `iphone-app` | 原生 iPhone 客户端 | 否 |
 | `admin-platform` | Admin、Diagnostics 与 Collector | 否 |
 | `runtime-distribution` | CLI、Supervisor、组装、Manifest 与安装测试 | 是 |
-| `homebrew-tap` | Homebrew Formula 元数据 | Formula |
+| `homebrew-tap` | 第三方 Homebrew Formula 元数据 | Formula |
 
 这些目录是独立 Git 仓库。跨仓库只通过版本化 Schema、Fixtures、Manifest 和兼容记录协作，不导入兄弟仓库源码。
+
+## GitHub 组织边界
+
+GitHub owner 为 [`codex-remote`](https://github.com/codex-remote)。当前仓库状态如下：
+
+| 可见性 | 仓库 | 当前状态 |
+| --- | --- | --- |
+| Public | `docs`、`homebrew-tap` | 已推送公开文档与第三方 Formula |
+| Public | `releases` | 预留为不可变 Runtime 资产仓库，当前为空 |
+| Public | `protocol`、`codex-plugin` | 预留为公开契约与 Codex 插件，当前为空 |
+| Public | `mobile-web` | 仓库已预留；开源许可未决定前不推送源码 |
+| Private | `runtime-distribution`、`relay-server`、`mac-agent`、`iphone-app`、`admin-platform` | 核心实现已推送，保持私有 |
+
+公开 Tap、Cask 或插件只能包含安装元数据、版本化契约和必要文档，不得成为分发私有源码的通道。
 
 ## 当前 Runtime
 
@@ -73,12 +87,11 @@ flowchart LR
 
 ## 下一放行点
 
-1. 建立 `codex-remote` GitHub 组织与公开/私有仓库边界。
-2. 选择公开二进制许可证，生成并审查完整第三方许可证清单。
-3. 配置 Developer ID 签名和 Apple 公证。
-4. 创建不可变组件 Tag，发布 Runtime archive 与 manifest。
-5. 更新并发布 Tap，完成干净 Apple Silicon Mac 的安装、升级、回滚与真机复验。
-6. 之后再申请 Homebrew 官方 Formula，获得干净机器上的 `brew install codex-remote`。
+1. 选择公开二进制许可证，生成并审查完整第三方许可证清单。
+2. 配置 Developer ID 签名和 Apple 公证。
+3. 创建不可变组件 Tag，发布 Runtime archive 与 manifest。
+4. 完成干净 Apple Silicon Mac 的第三方 Tap 安装、升级、回滚与真机复验。
+5. 稳定后提交 Homebrew 官方 Cask，获得干净机器上的 `brew install codex-remote`。
 
 ## 关键文档
 
