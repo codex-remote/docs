@@ -22,14 +22,14 @@ owner: platform-team
 | 范围 | 状态 | 结论 |
 | --- | --- | --- |
 | 局域网 Mobile Web | 可用里程碑 | iPhone Safari 单标签真机闭环已通过 |
-| Homebrew Runtime `0.2.0-beta.1` | 公开 Beta 准备中 | 基于已通过的本机安装、隔离数据库、动态端口、LaunchAgents、Doctor 与配对验收重新构建 |
-| 第三方 Homebrew Tap | 仓库已公开 | 将发布明确未签名、未公证的 GitHub prerelease；Stable 安全门禁不变 |
+| Homebrew Runtime `0.2.0-beta.1` | 公开 Beta 已发布 | Archive、Manifest、SHA256SUMS 和许可已上传；未签名、未公证 |
+| 第三方 Homebrew Tap | 可安装 | 远程 `brew install codex-remote/tap/codex-remote` 与 Formula 测试通过 |
 | 官方短命令 `brew install codex-remote` | 未获得 | 闭源 Runtime 需提交 Homebrew 官方 Cask，不是 `homebrew/core` Formula |
 | 公网访问 | 未交付 | TLS、稳定域名、限流、容量和恢复演练待完成 |
 | 原生 iPhone Runtime 迁移 | 未交付 | 当前 iPhone App 仍使用旧 WebSocket 数据通道 |
 | Admin/Diagnostics | 独立演进 | 不属于 Homebrew 用户 Runtime |
 
-当前本机产物与精确验收证据见 [[0.2.0 Homebrew 发布候选]]。Beta 允许在明确披露后跳过签名和公证，但许可证、不可变 Tag、校验值、干净机器安装和真机门禁仍必须通过。
+当前产物与精确验收证据见 [[0.2.0 Homebrew 发布候选]]。Beta 允许在明确披露后跳过签名和公证；许可证、不可变 Tag、校验值和当前开发机远程安装已通过，干净机器完整验收仍待完成。
 
 ## 仓库边界
 
