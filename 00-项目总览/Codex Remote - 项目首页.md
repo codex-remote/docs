@@ -41,7 +41,7 @@ owner: platform-team
 | `iphone-app` | 原生 iPhone 客户端 | 否 |
 | `admin-platform` | Admin、Diagnostics 与 Collector | 否 |
 | `runtime-distribution` | CLI、Supervisor、组装、Manifest 与安装测试 | 是 |
-| `homebrew-tap` | 第三方 Homebrew Formula 元数据 | Formula |
+| `homebrew-tap` | 第三方 Homebrew Formula 与公开 Runtime Release 资产 | Formula + 二进制 |
 
 这些目录是独立 Git 仓库。跨仓库只通过版本化 Schema、Fixtures、Manifest 和兼容记录协作，不导入兄弟仓库源码。
 
@@ -51,12 +51,11 @@ GitHub owner 为 [`codex-remote`](https://github.com/codex-remote)。当前仓�
 
 | 可见性 | 仓库 | 当前状态 |
 | --- | --- | --- |
-| Public | `homebrew-tap` | 第三方 Formula 安装元数据 |
-| Public | `releases` | 预留为不可变 Runtime 资产仓库，当前为空 |
+| Public | `homebrew-tap` | 第三方 Formula 安装元数据与不可变 Runtime Release 资产 |
 | Private | `docs` | 产品、架构、协议和发布知识库，暂不公开 |
 | Private | `runtime-distribution`、`relay-server`、`mac-agent`、`mobile-web`、`iphone-app`、`admin-platform` | 实现源码已推送，暂不开源 |
 
-当前原则是“源码和内部文档私有，应用公开分发”。公开 Tap、未来官方 Cask 和 Release 只能包含安装元数据、签名公证的二进制、许可声明和必要的安装说明，不得成为公开私有源码或内部设计文档的通道。
+当前原则是“源码和内部文档私有，应用公开分发”。`homebrew-tap` 是唯一公开分发仓库；未来官方 Cask 和本仓库的 GitHub Release 只能包含安装元数据、签名公证的二进制、许可声明和必要的安装说明，不得成为公开私有源码或内部设计文档的通道。
 
 ## 当前 Runtime
 
