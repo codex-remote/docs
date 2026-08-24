@@ -22,14 +22,15 @@ owner: platform-team
 | 范围 | 状态 | 结论 |
 | --- | --- | --- |
 | 局域网 Mobile Web | 可用里程碑 | iPhone Safari 单标签真机闭环已通过 |
-| Homebrew Runtime `0.2.0-beta.1` | 公开 Beta 已发布 | Archive、Manifest、SHA256SUMS 和许可已上传；未签名、未公证 |
-| 第三方 Homebrew Tap | 可安装 | 远程 `brew install codex-remote/tap/codex-remote` 与 Formula 测试通过 |
+| Homebrew Runtime `0.2.0-beta.1` | 已发现阻塞缺陷 | 默认 `Application Support` 路径未转义，Valkey 无法启动；不得继续推荐 |
+| Homebrew Runtime `0.2.0-beta.2` | 修复准备中 | 修复 Valkey 配置转义与失败回滚，完成回归测试后发布 |
+| 第三方 Homebrew Tap | Beta 可安装 | 当前 Formula 仍为 `beta.1`，待 `beta.2` 发布后升级 |
 | 官方短命令 `brew install codex-remote` | 未获得 | 闭源 Runtime 需提交 Homebrew 官方 Cask，不是 `homebrew/core` Formula |
 | 公网访问 | 未交付 | TLS、稳定域名、限流、容量和恢复演练待完成 |
 | 原生 iPhone Runtime 迁移 | 未交付 | 当前 iPhone App 仍使用旧 WebSocket 数据通道 |
 | Admin/Diagnostics | 独立演进 | 不属于 Homebrew 用户 Runtime |
 
-当前产物与精确验收证据见 [[0.2.0 Homebrew 发布候选]]。Beta 允许在明确披露后跳过签名和公证；许可证、不可变 Tag、校验值和当前开发机远程安装已通过，干净机器完整验收仍待完成。
+当前产物、`beta.1` 事故与修复证据见 [[0.2.0 Homebrew 发布候选]]。Beta 允许在明确披露后跳过签名和公证，但默认 macOS 状态路径的真实 Setup 必须成为发布门禁。
 
 ## 仓库边界
 
@@ -80,13 +81,13 @@ flowchart LR
 - 仅支持 Apple Silicon macOS。
 - 局域网 HTTP 按单 Safari 标签使用；双标签并发刷新会触发安全重放撤销。
 - `410 CURSOR_EXPIRED`、公网限流、多实例、长期压力与灾难恢复尚未完成。
-- 公开二进制许可证和完整 `THIRD_PARTY_NOTICES` 尚未确定。
+- 公开 Beta 二进制许可证和自动生成的 `THIRD_PARTY_NOTICES` 已建立，仍需正式法律审查。
 - 无 Developer ID Application 身份和 notarization profile 时不得发布稳定 Runtime。
 
 ## 下一放行点
 
-1. 审查公开 Beta 二进制许可和自动生成的第三方许可证清单。
-2. 创建不可变组件 Tag，发布 `0.2.0-beta.1` prerelease、Runtime archive 与 manifest。
+1. 发布修复默认状态路径和失败回滚的 `0.2.0-beta.2`。
+2. 使用真实 `~/Library/Application Support/CodexRemote` 完成 Setup、Doctor 与配对。
 3. 完成干净 Apple Silicon Mac 的第三方 Tap 安装、升级、回滚与真机复验。
 4. 注册 Apple Developer Program 后完成 Developer ID 签名和 Apple 公证，准备 Stable。
 5. Stable 后提交 Homebrew 官方 Cask，获得干净机器上的 `brew install codex-remote`。
