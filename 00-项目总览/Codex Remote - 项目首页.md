@@ -24,7 +24,8 @@ owner: platform-team
 | 局域网 Mobile Web | 可用里程碑 | iPhone Safari 单标签真机闭环已通过 |
 | Homebrew Runtime `0.2.0-beta.1` | 已发现阻塞缺陷 | 默认 `Application Support` 路径未转义，Valkey 无法启动；不得继续推荐 |
 | Homebrew Runtime `0.2.0-beta.2` | 修复版已发布 | Valkey 配置转义与失败回滚已修复；远程升级后 63800 恢复监听 |
-| 第三方 Homebrew Tap | Beta 可安装 | Formula 已更新到 `beta.2`，远程升级与 Formula 测试通过 |
+| Homebrew Runtime `0.2.0-beta.3` | 体验收敛中 | 五个登录项收敛为一个 `com.codex-remote.runtime` Supervisor |
+| 第三方 Homebrew Tap | Beta 可安装 | 当前 Formula 为 `beta.2`，待 Supervisor 回归通过后发布 `beta.3` |
 | 官方短命令 `brew install codex-remote` | 未获得 | 闭源 Runtime 需提交 Homebrew 官方 Cask，不是 `homebrew/core` Formula |
 | 公网访问 | 未交付 | TLS、稳定域名、限流、容量和恢复演练待完成 |
 | 原生 iPhone Runtime 迁移 | 未交付 | 当前 iPhone App 仍使用旧 WebSocket 数据通道 |
@@ -86,8 +87,8 @@ flowchart LR
 
 ## 下一放行点
 
-1. 由用户从外部 Terminal 运行 `codex-remote setup --repair`，完成剩余 Relay、Mac Agent、Gateway 启动。
-2. 使用真实 `~/Library/Application Support/CodexRemote` 完成 Doctor 与配对。
+1. 发布只注册一个 `com.codex-remote.runtime` LaunchAgent 的 `0.2.0-beta.3`。
+2. 由用户从外部 Terminal 运行 `codex-remote setup --repair`，迁移旧五项并完成 Doctor 与配对。
 3. 完成干净 Apple Silicon Mac 的第三方 Tap 安装、升级、回滚与真机复验。
 4. 注册 Apple Developer Program 后完成 Developer ID 签名和 Apple 公证，准备 Stable。
 5. Stable 后提交 Homebrew 官方 Cask，获得干净机器上的 `brew install codex-remote`。
