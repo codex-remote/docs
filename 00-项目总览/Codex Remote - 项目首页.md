@@ -1,7 +1,7 @@
 ---
 title: Codex Remote - 项目首页
 date: 2026-08-14
-updated: 2026-08-23
+updated: 2026-08-24
 tags:
   - codex-remote
   - project
@@ -22,14 +22,14 @@ owner: platform-team
 | 范围 | 状态 | 结论 |
 | --- | --- | --- |
 | 局域网 Mobile Web | 可用里程碑 | iPhone Safari 单标签真机闭环已通过 |
-| Homebrew Runtime `0.2.0` | 本地发布候选 | 本机安装、隔离数据库、动态端口、LaunchAgents、Doctor 与配对通过 |
-| 第三方 Homebrew Tap | 仓库已公开 | Formula 已推送，但签名、公证的 Release 资产尚未发布 |
+| Homebrew Runtime `0.2.0-beta.1` | 公开 Beta 准备中 | 基于已通过的本机安装、隔离数据库、动态端口、LaunchAgents、Doctor 与配对验收重新构建 |
+| 第三方 Homebrew Tap | 仓库已公开 | 将发布明确未签名、未公证的 GitHub prerelease；Stable 安全门禁不变 |
 | 官方短命令 `brew install codex-remote` | 未获得 | 闭源 Runtime 需提交 Homebrew 官方 Cask，不是 `homebrew/core` Formula |
 | 公网访问 | 未交付 | TLS、稳定域名、限流、容量和恢复演练待完成 |
 | 原生 iPhone Runtime 迁移 | 未交付 | 当前 iPhone App 仍使用旧 WebSocket 数据通道 |
 | Admin/Diagnostics | 独立演进 | 不属于 Homebrew 用户 Runtime |
 
-当前本机产物与精确验收证据见 [[0.2.0 Homebrew 发布候选]]。代码可运行不等于公开发布；远端安装命令只能在签名、公证、许可证和干净机器门禁全部通过后对外提供。
+当前本机产物与精确验收证据见 [[0.2.0 Homebrew 发布候选]]。Beta 允许在明确披露后跳过签名和公证，但许可证、不可变 Tag、校验值、干净机器安装和真机门禁仍必须通过。
 
 ## 仓库边界
 
@@ -55,7 +55,7 @@ GitHub owner 为 [`codex-remote`](https://github.com/codex-remote)。当前仓�
 | Private | `docs` | 产品、架构、协议和发布知识库，暂不公开 |
 | Private | `runtime-distribution`、`relay-server`、`mac-agent`、`mobile-web`、`iphone-app`、`admin-platform` | 实现源码已推送，暂不开源 |
 
-当前原则是“源码和内部文档私有，应用公开分发”。`homebrew-tap` 是唯一公开分发仓库；未来官方 Cask 和本仓库的 GitHub Release 只能包含安装元数据、签名公证的二进制、许可声明和必要的安装说明，不得成为公开私有源码或内部设计文档的通道。
+当前原则是“源码和内部文档私有，应用公开分发”。`homebrew-tap` 是唯一公开分发仓库；GitHub prerelease 可以包含明确未签名、未公证的 Beta 二进制，Stable 与未来官方 Cask 只使用签名公证的二进制。公开内容只能包含安装元数据、二进制、许可声明和必要说明，不得成为公开私有源码或内部设计文档的通道。
 
 ## 当前 Runtime
 
@@ -85,11 +85,11 @@ flowchart LR
 
 ## 下一放行点
 
-1. 选择公开二进制许可证，生成并审查完整第三方许可证清单。
-2. 配置 Developer ID 签名和 Apple 公证。
-3. 创建不可变组件 Tag，发布 Runtime archive 与 manifest。
-4. 完成干净 Apple Silicon Mac 的第三方 Tap 安装、升级、回滚与真机复验。
-5. 稳定后提交 Homebrew 官方 Cask，获得干净机器上的 `brew install codex-remote`。
+1. 审查公开 Beta 二进制许可和自动生成的第三方许可证清单。
+2. 创建不可变组件 Tag，发布 `0.2.0-beta.1` prerelease、Runtime archive 与 manifest。
+3. 完成干净 Apple Silicon Mac 的第三方 Tap 安装、升级、回滚与真机复验。
+4. 注册 Apple Developer Program 后完成 Developer ID 签名和 Apple 公证，准备 Stable。
+5. Stable 后提交 Homebrew 官方 Cask，获得干净机器上的 `brew install codex-remote`。
 
 ## 关键文档
 
