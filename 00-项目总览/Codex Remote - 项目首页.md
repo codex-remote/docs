@@ -51,13 +51,12 @@ GitHub owner 为 [`codex-remote`](https://github.com/codex-remote)。当前仓�
 
 | 可见性 | 仓库 | 当前状态 |
 | --- | --- | --- |
-| Public | `docs`、`homebrew-tap` | 已推送公开文档与第三方 Formula |
+| Public | `homebrew-tap` | 第三方 Formula 安装元数据 |
 | Public | `releases` | 预留为不可变 Runtime 资产仓库，当前为空 |
-| Public | `protocol`、`codex-plugin` | 预留为公开契约与 Codex 插件，当前为空 |
-| Public | `mobile-web` | 仓库已预留；开源许可未决定前不推送源码 |
-| Private | `runtime-distribution`、`relay-server`、`mac-agent`、`iphone-app`、`admin-platform` | 核心实现已推送，保持私有 |
+| Private | `docs` | 产品、架构、协议和发布知识库，暂不公开 |
+| Private | `runtime-distribution`、`relay-server`、`mac-agent`、`mobile-web`、`iphone-app`、`admin-platform` | 实现源码已推送，暂不开源 |
 
-公开 Tap、Cask 或插件只能包含安装元数据、版本化契约和必要文档，不得成为分发私有源码的通道。
+当前原则是“源码和内部文档私有，应用公开分发”。公开 Tap、未来官方 Cask 和 Release 只能包含安装元数据、签名公证的二进制、许可声明和必要的安装说明，不得成为公开私有源码或内部设计文档的通道。
 
 ## 当前 Runtime
 
