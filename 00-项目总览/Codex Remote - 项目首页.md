@@ -26,7 +26,7 @@ owner: platform-team
 | Homebrew Runtime `0.2.0-beta.2` | 修复版已发布 | Valkey 配置转义与失败回滚已修复；远程升级后 63800 恢复监听 |
 | Homebrew Runtime `0.2.0-beta.3` | 已发布 | 五个登录项收敛为一个 `com.codex-remote.runtime` Supervisor |
 | 第三方 Homebrew Tap | Beta 可安装 | Formula 与 GitHub prerelease 已更新到 `beta.3` |
-| 官方短命令 `brew install codex-remote` | 未获得 | 闭源 Runtime 需提交 Homebrew 官方 Cask，不是 `homebrew/core` Formula |
+| 官方短命令 `brew install codex-remote` | 未获得 | 当前仍通过第三方 Tap 安装；官方 Homebrew 分发另行申请 |
 | 公网访问 | 未交付 | 临时随机域名不满足可靠性要求；稳定 Origin、容量和恢复方案另行设计 |
 | 原生 iPhone Runtime 迁移 | 未交付 | 当前 iPhone App 仍使用旧 WebSocket 数据通道 |
 | Admin/Diagnostics | 独立演进 | 不属于 Homebrew 用户 Runtime |
@@ -54,10 +54,10 @@ GitHub owner 为 [`codex-remote`](https://github.com/codex-remote)。当前仓�
 | 可见性 | 仓库 | 当前状态 |
 | --- | --- | --- |
 | Public | `homebrew-tap` | 第三方 Formula 安装元数据与不可变 Runtime Release 资产 |
-| Private | `docs` | 产品、架构、协议和发布知识库，暂不公开 |
-| Private | `runtime-distribution`、`relay-server`、`mac-agent`、`mobile-web`、`iphone-app`、`admin-platform` | 实现源码已推送，暂不开源 |
+| Public | `docs` | 产品、架构、协议和发布知识库 |
+| Public | `runtime-distribution`、`relay-server`、`mac-agent`、`mobile-web`、`iphone-app`、`admin-platform` | Apache-2.0 实现源码 |
 
-当前原则是“源码和内部文档私有，应用公开分发”。`homebrew-tap` 是唯一公开分发仓库；GitHub prerelease 可以包含明确未签名、未公证的 Beta 二进制，Stable 与未来官方 Cask 只使用签名公证的二进制。公开内容只能包含安装元数据、二进制、许可声明和必要说明，不得成为公开私有源码或内部设计文档的通道。
+当前原则是“源码、架构文档和分发元数据公开，运行凭据和用户数据保持私有”。各仓库采用 Apache-2.0，并通过版本化契约独立演进。已经发布的历史 Beta 二进制保留原许可；未来 Stable 与官方分发只使用签名、公证且通过发布门禁的构建产物。
 
 ## 当前 Runtime
 
