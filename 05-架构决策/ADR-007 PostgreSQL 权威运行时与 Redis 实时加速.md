@@ -137,9 +137,9 @@ Agent 离线时只能展示 PostgreSQL 已持久部分，并明确标记 `waitin
 
 拒绝作为当前目标。它简化正确性但会把首 token 延迟和写放大置于同步路径。采用 Agent SQLite + Redis Result Stream + 异步持久化，在不牺牲可恢复性的前提下降低实时延迟。
 
-### 通过查询接口让 Web 发现 iPhone 的新 Run
+### 通过完整查询接口轮询事件
 
-可以作为降级方式，但不作为主实时方案。轮询 `/sessions/{id}/runs?after_session_sequence=` 能工作，Session SSE 能更及时并减少空轮询；两者共享同一 PostgreSQL 快照和序号。
+拒绝作为新的事件传输方案。轮询 `/sessions/{id}/runs?after_session_sequence=` 只能返回重复的 Run 摘要，无法高效承载细粒度 delta。非 SSE 场景使用独立的增量 `events:poll` 契约；它与 Session/Run SSE 共享 PostgreSQL 权威事件和 sequence。完整查询接口只用于快照恢复。
 
 ### 首阶段引入周期 Reconciler
 

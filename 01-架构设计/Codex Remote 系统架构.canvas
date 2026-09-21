@@ -24,7 +24,7 @@
 		{"id":"a000000000000016","type":"text","x":-490,"y":940,"width":390,"height":270,"text":"## Run Server `18775`\n\n仅监听 Loopback\nRuntime HTTP/SSE + Auth API\n`RuntimeAuthModule` 插件边界\nServer 分配 Scope，Gateway 不是信任边界","color":"6"},
 		{"id":"a000000000000017","type":"text","x":-20,"y":940,"width":390,"height":270,"text":"## Runtime 数据层\n\nPostgreSQL：权威 Runtime + Auth\nValkey：实时加速，不承载 Auth\nOpaque Token 只保存 Secret 哈希\nRefresh Rotation 事务化","color":"3"},
 		{"id":"a000000000000018","type":"text","x":-490,"y":1250,"width":390,"height":160,"text":"## Auth Control `18776`\n\n同一 Relay 进程 · 独立 Loopback Listener\n配对授权 · 客户端撤销 · 不经过 Gateway","color":"2"},
-		{"id":"a000000000000019","type":"text","x":920,"y":940,"width":710,"height":270,"text":"## 公网边界 · 尚未开放\n\n稳定域名 + TLS · `AUTH_COOKIE_SECURE=true`\n公网限流与连接/Body 上限 · 固定 Cloudflare Tunnel\n\n`*.trycloudflare.com` 只适合临时联调，不作为长期配对 Origin","color":"1"}
+		{"id":"a000000000000019","type":"text","x":920,"y":940,"width":710,"height":270,"text":"## 公网边界 · 尚未开放\n\n稳定 Origin + TLS · `AUTH_COOKIE_SECURE=true`\n公网限流与连接/Body 上限\n受控 Connector · 恢复演练 · 外部安全检查","color":"1"}
 	],
 	"edges":[
 		{"id":"e000000000000001","fromNode":"a000000000000005","fromSide":"right","toNode":"a000000000000006","toSide":"left","toEnd":"arrow","label":"WSS","color":"5"},

@@ -1,7 +1,7 @@
 ---
 title: Mobile Web Gateway 与 Runtime 鉴权架构
 date: 2026-08-22
-updated: 2026-08-23
+updated: 2026-08-26
 tags:
   - ai-coding-remote
   - architecture
@@ -22,7 +22,7 @@ related:
 # Mobile Web Gateway 与 Runtime 鉴权架构
 
 > [!success] 已实现基线
-> Gateway、Runtime Auth、配对 CLI、Refresh Rotation、前端自动刷新和本地服务入口已实现并通过临时端口端到端验证。Cloudflare Tunnel、域名、TLS、公网限流和公网发布仍不在当前交付范围内。
+> Gateway、Runtime Auth、配对 CLI、Refresh Rotation、前端自动刷新和局域网入口已实现。稳定公网入口仍属于后续架构范围。
 
 ## 1. 当前拓扑
 
@@ -51,7 +51,11 @@ flowchart LR
 
 Gateway 归属 `mobile-web` 仓库，Auth 归属 `relay-server`。两者通过版本化 HTTP 契约协作，不共享兄弟仓库源码。Admin Web、Diagnostics、SLS 和 CoreDevice 仍属于 `admin-platform`。
 
-### 1.1 独立性与依赖方向
+### 1.1 `devrun crweb` 开发栈监督边界
+
+`devrun crweb` 使用 `runtime-distribution` 的新增 `dev-supervisor` 命令，构建并托管当前工作树的 Relay、Mac Agent 和 Gateway。外层只注册独立的 `com.codexremote.runtime.dev.sse` 或 `.poll` LaunchAgent，不接管发布版 `com.codex-remote.runtime`，也不复用发布版状态目录。SSE 使用 `18874/18875/18876`，Poll 使用 `18884/18885/18886`；两种完整栈互斥。Vite `test/codex/poll` 仍是前端快速开发入口，不属于完整栈子进程。
+
+### 1.2 独立性与依赖方向
 
 | 模块 | 已具备的独立性 | 有意保留的集成关系 | 禁止依赖 |
 | --- | --- | --- | --- |
@@ -167,18 +171,18 @@ sequenceDiagram
 
 ## 5. 本地与未来公网兼容性
 
-| 维度 | 局域网当前实现 | 未来公网 |
+| 维度 | 局域网当前实现 | 未来稳定公网 |
 | --- | --- | --- |
-| 浏览器 URL | `http://<lan-ip>:18774` | `https://<stable-domain>` |
+| 浏览器 URL | `http://<lan-ip>:18774`；开发 Poll 为 `:18884` | `https://<stable-domain>` |
 | 前端 API | 同源 `/v1/auth/*`、`/v1/runtime/*` | 不变 |
-| Gateway 上游 | `127.0.0.1:18775` | 不变 |
-| Access/Refresh 语义 | Opaque + Rotation | 不变 |
+| Gateway 上游 | Loopback Run Server | 不变 |
+| Access/Refresh | Opaque + Rotation | 不变 |
 | Cookie | `HttpOnly; SameSite=Strict` | 增加 `Secure` |
-| TLS / WAF / Tunnel | 无 | 公网连接器负责边缘 TLS；只指向 Gateway |
+| TLS / Tunnel | 无 | 受控公网连接器只指向 Gateway |
 
-Origin 变化会隔离 Cookie 和 IndexedDB，因此从局域网迁移到公网域名时需要重新配对一次。这是浏览器安全边界，不是协议不兼容。
+Origin 变化会隔离 Cookie 和 IndexedDB，因此从局域网迁移到稳定公网域名时需要重新配对。这是浏览器安全边界，不是协议不兼容。
 
-公网开放前仍必须完成：稳定域名和 TLS、`AUTH_COOKIE_SECURE=true`、公网速率限制、连接/Body 上限、Cloudflare Tunnel 固定配置、恢复演练和外部安全检查。`*.trycloudflare.com` 的临时 URL 不适合作为长期配对 Origin。
+公网开放前必须完成稳定 Origin、TLS、`AUTH_COOKIE_SECURE=true`、公网速率限制、连接/Body 上限、日志脱敏、恢复演练和外部安全检查。
 
 ## 6. 运行与运维
 

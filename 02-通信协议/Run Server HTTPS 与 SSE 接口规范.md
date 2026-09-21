@@ -25,6 +25,7 @@ related:
   - "[[WebSocket 长连接模型]]"
   - "[[可靠多端运行时分阶段开发计划]]"
   - "[[Mobile Web Gateway 与 Runtime 鉴权架构]]"
+  - "[[Run Server JSON 轮询接口规范]]"
 ---
 
 # Run Server HTTPS 与 SSE 接口规范
@@ -40,6 +41,9 @@ related:
 
 > [!important] 契约来源顺序
 > 人工设计意图记录在本文；机器可执行事实以 `relay-server` 中版本化 OpenAPI、SSE JSON Schema 和 Fixtures 为准；Apifox 是同步后的协作与调试视图，不是唯一源。三者不一致时阶段验收失败。
+
+> [!note] SSE 保留与非 SSE 传输
+> SSE 是当前已实现的实时传输，不能因增加兼容通道而删除或改义。非 SSE 的 JSON 增量轮询另见 [[Run Server JSON 轮询接口规范]]；两个 `events:poll` 路径已进入本地 OpenAPI、Gateway allowlist 和自动化测试，生产限流与边缘验收仍待完成。
 
 ## 1. 客户端边界
 
@@ -179,11 +183,11 @@ Header：`Idempotency-Key` 必填。
 
 ## 8. `GET /sessions/{session_id}/runs`
 
-用途：Run 列表，也是 Session SSE 不可用时的降级补查。
+用途：读取 Run 摘要和快照恢复，不承担事件增量传输。
 
 查询参数：`after_session_sequence`、`cursor`、`limit`、`status`。响应返回 Run 摘要和当前 `session_sequence`。
 
-该接口不会替代 Session SSE；mobile-web 正常模式使用 SSE，降级模式才按服务端 `retry_after_ms` 轮询。
+该接口不会替代 Session SSE，也不作为新的事件轮询接口。Session/Run 事件的非 SSE 降级统一使用 [[Run Server JSON 轮询接口规范]] 中的两个 `events:poll` 路径；本文接口只用于首次加载、快照恢复和游标重建。
 
 ## 9. `POST /sessions/{session_id}/runs`
 

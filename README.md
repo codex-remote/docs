@@ -6,7 +6,7 @@ tags:
 aliases:
   - README
 status: active
-updated: 2026-08-23
+updated: 2026-08-26
 ---
 
 # Codex Remote 文档仓库
@@ -24,7 +24,11 @@ updated: 2026-08-23
 - [[Codex Remote - 项目首页]]：当前状态、仓库边界和下一步
 - [[系统总体架构]]：当前组件、数据流和部署边界
 - [[Mobile Web Gateway 与 Runtime 鉴权架构]]：局域网入口、配对与鉴权
+- [[Mobile Web 前端视觉与动效规范]]：流式状态、执行轨迹和移动端视觉基线
 - [[Run Server HTTPS 与 SSE 接口规范]]：用户侧 Runtime 契约
+- [[Run Server JSON 轮询接口规范]]：非 SSE Runtime 事件契约（本地已实现）
+- [[Runtime JSON 轮询传输架构]]：轮询传输、游标和资源边界（本地已实现）
+- [[Runtime JSON 轮询实施与验收清单]]：跨仓库实施顺序和验证门槛
 - [[0.2.0 Homebrew 发布候选]]：本地验收证据和公开发布阻塞项
 - [[发布与版本策略]]：Runtime、iPhone 与 Admin 的独立发布规则
 
@@ -34,6 +38,7 @@ updated: 2026-08-23
 | --- | --- |
 | Runtime 发布状态与组件 commit | [[0.2.0 Homebrew 发布候选]] 和 Runtime manifest |
 | HTTP/SSE 接口 | `relay-server/apifox/openapi.json` 与 [[Run Server HTTPS 与 SSE 接口规范]] |
+| JSON 轮询接口 | [[Run Server JSON 轮询接口规范]]（本地已进入 OpenAPI；公网硬化待完成） |
 | Agent WebSocket | `relay-server/protocol` 与 [[MVP WebSocket 协议]] |
 | 真机 Mobile Web 验收 | `mobile-web/docs/iphone-safari-acceptance.md` |
 | 安装、修复与卸载 | `runtime-distribution/README.md` 和 `docs/installation-troubleshooting.md` |

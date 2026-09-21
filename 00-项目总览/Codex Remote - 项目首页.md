@@ -1,7 +1,7 @@
 ---
 title: Codex Remote - 项目首页
 date: 2026-08-14
-updated: 2026-08-24
+updated: 2026-08-26
 tags:
   - codex-remote
   - project
@@ -27,7 +27,7 @@ owner: platform-team
 | Homebrew Runtime `0.2.0-beta.3` | 已发布 | 五个登录项收敛为一个 `com.codex-remote.runtime` Supervisor |
 | 第三方 Homebrew Tap | Beta 可安装 | Formula 与 GitHub prerelease 已更新到 `beta.3` |
 | 官方短命令 `brew install codex-remote` | 未获得 | 闭源 Runtime 需提交 Homebrew 官方 Cask，不是 `homebrew/core` Formula |
-| 公网访问 | 未交付 | TLS、稳定域名、限流、容量和恢复演练待完成 |
+| 公网访问 | 未交付 | 临时随机域名不满足可靠性要求；稳定 Origin、容量和恢复方案另行设计 |
 | 原生 iPhone Runtime 迁移 | 未交付 | 当前 iPhone App 仍使用旧 WebSocket 数据通道 |
 | Admin/Diagnostics | 独立演进 | 不属于 Homebrew 用户 Runtime |
 
@@ -102,6 +102,9 @@ flowchart LR
 - [[Runtime PostgreSQL 数据表规范]]
 - [[Runtime SQLite 与 Valkey 数据结构规范]]
 - [[Run Server HTTPS 与 SSE 接口规范]]
+- [[Run Server JSON 轮询接口规范]]
+- [[Runtime JSON 轮询传输架构]]
+- [[ADR-009 Runtime JSON 轮询作为非 SSE 兼容传输]]
 - [[发布与版本策略]]
 - [[0.2.0 Homebrew 发布候选]]
 
