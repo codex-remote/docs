@@ -6,12 +6,15 @@ tags:
 aliases:
   - README
 status: active
-updated: 2026-08-26
+updated: 2026-10-08
 ---
 
 # Codex Remote 文档仓库
 
 这是 Codex Remote 的产品、架构、协议和发布知识库。应用代码保持五个独立仓库：`iphone-app`、`mobile-web`、`relay-server`、`mac-agent` 和 `admin-platform`；Homebrew 分发另由 `runtime-distribution` 与 `homebrew-tap` 两个独立仓库维护。
+
+面向用户的安装、产品预览、源码地图和路线图统一从
+[主项目仓库](https://github.com/codex-remote/codex-remote)进入；本仓库继续作为详细设计与决策事实源。
 
 > Codex Remote 是独立开源项目，与 OpenAI 没有关联或背书关系。
 
@@ -19,7 +22,8 @@ updated: 2026-08-26
 > Apple Silicon 本机已经可以启动完整 Runtime、生成一次性二维码，并在 iPhone Safari 单标签中完成配对、刷新恢复、真实会话、SSE、退出与 Mac 端撤销。详细真机证据以 `mobile-web/docs/iphone-safari-acceptance.md` 为准。
 
 > [!warning] 发布状态
-> 源码与架构文档采用 Apache-2.0 公开。已经发布的 `0.2.0-beta.1` 至
+> 当前公开 Runtime 为 `0.2.0-beta.10`，源码与架构文档采用 Apache-2.0 公开。
+> 已经发布的 `0.2.0-beta.1` 至
 > `0.2.0-beta.3` 二进制仍保留其历史许可，且尚未完成 Developer ID 签名和 Apple
 > 公证；公开源码不等同于生产就绪。
 

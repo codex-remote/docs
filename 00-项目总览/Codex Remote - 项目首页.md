@@ -1,7 +1,7 @@
 ---
 title: Codex Remote - 项目首页
 date: 2026-08-14
-updated: 2026-08-26
+updated: 2026-10-08
 tags:
   - codex-remote
   - project
@@ -24,8 +24,8 @@ owner: platform-team
 | 局域网 Mobile Web | 可用里程碑 | iPhone Safari 单标签真机闭环已通过 |
 | Homebrew Runtime `0.2.0-beta.1` | 已发现阻塞缺陷 | 默认 `Application Support` 路径未转义，Valkey 无法启动；不得继续推荐 |
 | Homebrew Runtime `0.2.0-beta.2` | 修复版已发布 | Valkey 配置转义与失败回滚已修复；远程升级后 63800 恢复监听 |
-| Homebrew Runtime `0.2.0-beta.3` | 已发布 | 五个登录项收敛为一个 `com.codex-remote.runtime` Supervisor |
-| 第三方 Homebrew Tap | Beta 可安装 | Formula 与 GitHub prerelease 已更新到 `beta.3` |
+| Homebrew Runtime `0.2.0-beta.10` | 已发布 | 单 Supervisor；`pair`、`start`、`restart` 默认输出终端二维码与可复制链接 |
+| 第三方 Homebrew Tap | Beta 可安装 | Formula 与 GitHub prerelease 已更新到 `beta.10` |
 | 官方短命令 `brew install codex-remote` | 未获得 | 当前仍通过第三方 Tap 安装；官方 Homebrew 分发另行申请 |
 | 公网访问 | 未交付 | 临时随机域名不满足可靠性要求；稳定 Origin、容量和恢复方案另行设计 |
 | 原生 iPhone Runtime 迁移 | 未交付 | 当前 iPhone App 仍使用旧 WebSocket 数据通道 |
